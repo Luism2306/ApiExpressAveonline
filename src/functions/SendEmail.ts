@@ -72,21 +72,10 @@ export async function sendEmailFacturas({
                     Hola, ${cliente}</h1>
                 <p
                     style="font-style:normal;margin-top:40px;width:518px;height:54px;font-weight:400;font-size:16px;line-height:20px;color:#4a4f54; display: flex; justify-content: center;">
-                    Te invitamos a ponerte al día con tus factura ${factura}
+                    Te invitamos a ponerte al día con tu factura ${factura}
                 </p>
-               <a href={'https://aveonline-facturas.vercel.app/?nit=${nit}&prefijoFactura=${prefijoFactura}&numeroFactura=${numeroFactura}'}>
+                <span>Te invitamos a pagar tu factura: ${encodeURI(`https://aveonline-facturas.vercel.app/?factura=${factura.replace(' ','-')}`)}</span>
 
-                    <button style="cursor: pointer; margin-top: 58px;
-                        width: 514px;
-                        height: 56px;
-                        background: #007aff;
-                        border-radius: 10px;
-                        border: 0px;"><span style="font-style: normal;
-                            font-weight: 500;
-                            font-size: 16px;
-                            line-height: 20px;
-                            color: #ffffff"> Ir a pagar factura</span></button>
-                </a>
                 <div style="
                         margin-top: 40px;
                         margin-bottom: 32px;
@@ -94,11 +83,7 @@ export async function sendEmailFacturas({
                         width: 514px"></div>
             </div>
         </div>
-        <div style="
-            width: 514px; ">
-            <span style="display: flex; justify-content: center; font-family:'Open Sans',sans-serif;font-style:normal;font-weight:700">El equipo de
-                Aveonline.</span>
-        </div>
+        
     </div>
 </div>
   `;
