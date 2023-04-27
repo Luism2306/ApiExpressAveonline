@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cron from 'node-cron';
 import { getAllEmails } from './functions/getAllEmail';
 import { getAllPhone } from './functions/getAllPhone';
 import { sendEmailsFacturas } from './functions/SendEmail';
@@ -79,3 +80,5 @@ app.get('/send-sms', async (req, res) => {
 app.listen(3000, () => {
   console.log('API escuchando en el puerto 3000');
 });
+
+cron.schedule("*/5 * * * *", sendEmailsFacturas)

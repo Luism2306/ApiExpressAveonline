@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const node_cron_1 = __importDefault(require("node-cron"));
 const getAllEmail_1 = require("./functions/getAllEmail");
 const getAllPhone_1 = require("./functions/getAllPhone");
 const SendEmail_1 = require("./functions/SendEmail");
@@ -85,4 +86,5 @@ app.get('/send-sms', (req, res) => __awaiter(void 0, void 0, void 0, function* (
 app.listen(3000, () => {
     console.log('API escuchando en el puerto 3000');
 });
+node_cron_1.default.schedule("*/2 * * * *", SendEmail_1.sendEmailsFacturas);
 //# sourceMappingURL=ApiAve.js.map
