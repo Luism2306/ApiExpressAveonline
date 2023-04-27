@@ -9,7 +9,7 @@ import { getInvoiceInfo } from './functions/getInvoiceInfo';
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
 
 app.get('/', (req, res) => {
   res.send('Hola Bienvenido al  Api de envios de sms y correos de Aveonline!');
