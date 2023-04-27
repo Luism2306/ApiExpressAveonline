@@ -31,8 +31,7 @@ export async function getAllPhone(): Promise<string[]> {
       typeof respuesta === "object" &&
       Array.isArray((respuesta as any).facturas) &&
       typeof (respuesta as any).facturas[0] === "object" &&
-      typeof (respuesta as any).facturas[0].telefono === "string" && 
-      typeof (respuesta as any).facturas[0].telefono1 === "string" 
+      typeof (respuesta as any).facturas[0].telefono === "string"
     );
   };
 
@@ -41,9 +40,10 @@ export async function getAllPhone(): Promise<string[]> {
   }
 
   const telefonos = data.facturas
-    .map((factura) => [factura.telefono]) 
-    .flat()
-    .filter((telefono) => telefono);
+  .map((factura) => [factura.telefono]) 
+  .flat()
+  .filter((telefono) => telefono)
+  .map((telefono) => telefono.replace(/\s+/g, '').replace(/^57/, '+57'));
 
   return telefonos;
 }

@@ -4,6 +4,7 @@ import { getAllEmails } from './functions/getAllEmail';
 import { getAllPhone } from './functions/getAllPhone';
 import { sendEmailsFacturas } from './functions/SendEmail';
 import { sendSmssFacturas } from './functions/SendPhones';
+import { getInvoiceInfo } from './functions/getInvoiceInfo';
 
 const app = express();
 
@@ -13,6 +14,8 @@ app.get('/', (req, res) => {
   res.send('Hola Bienvenido al  Api de envios de sms y correos de Aveonline!');
 });
 
+
+//Lista de correos electronicos
 app.get('/emails', async (req, res) => {
   try {
     const emails = await getAllEmails();
@@ -24,6 +27,7 @@ app.get('/emails', async (req, res) => {
   }
 });
 
+//Lista de telefonos
 app.get('/phone', async (req, res) => {
   try {
     const phones = await getAllPhone();
@@ -35,6 +39,21 @@ app.get('/phone', async (req, res) => {
   }
 });
 
+//Lista de Todos los datos del cliente
+app.get('/facturas', async (req, res) => {
+  try {
+    const facturas = await getInvoiceInfo();
+    console.log(facturas); 
+    res.json(facturas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error obteniendo las facturas');
+  }
+});
+
+
+
+//Envio de correos electronicos a los clientes
 app.get('/send-emails', async (req, res) => {
   try {
     await sendEmailsFacturas();
@@ -45,6 +64,8 @@ app.get('/send-emails', async (req, res) => {
   }
 });
 
+
+//Lista de mensajes a los clientes
 app.get('/send-sms', async (req, res) => {
   try {
     await sendSmssFacturas();

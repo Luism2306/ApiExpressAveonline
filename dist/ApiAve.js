@@ -18,11 +18,13 @@ const getAllEmail_1 = require("./functions/getAllEmail");
 const getAllPhone_1 = require("./functions/getAllPhone");
 const SendEmail_1 = require("./functions/SendEmail");
 const SendPhones_1 = require("./functions/SendPhones");
+const getInvoiceInfo_1 = require("./functions/getInvoiceInfo");
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
 app.get('/', (req, res) => {
     res.send('Hola Bienvenido al  Api de envios de sms y correos de Aveonline!');
 });
+//Lista de correos electronicos
 app.get('/emails', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const emails = yield (0, getAllEmail_1.getAllEmails)();
@@ -34,6 +36,7 @@ app.get('/emails', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.status(500).send('Error obteniendo los correos electrónicos');
     }
 }));
+//Lista de telefonos
 app.get('/phone', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const phones = yield (0, getAllPhone_1.getAllPhone)();
@@ -45,6 +48,19 @@ app.get('/phone', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).send('Error obteniendo los telefonos');
     }
 }));
+//Lista de Todos los datos del cliente
+app.get('/facturas', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const facturas = yield (0, getInvoiceInfo_1.getInvoiceInfo)();
+        console.log(facturas);
+        res.json(facturas);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).send('Error obteniendo las facturas');
+    }
+}));
+//Envio de correos electronicos a los clientes
 app.get('/send-emails', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, SendEmail_1.sendEmailsFacturas)();
@@ -55,6 +71,7 @@ app.get('/send-emails', (req, res) => __awaiter(void 0, void 0, void 0, function
         res.status(500).send('Error enviando los correos electrónicos');
     }
 }));
+//Lista de mensajes a los clientes
 app.get('/send-sms', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, SendPhones_1.sendSmssFacturas)();

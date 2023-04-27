@@ -34,8 +34,7 @@ function getAllPhone() {
             return (typeof respuesta === "object" &&
                 Array.isArray(respuesta.facturas) &&
                 typeof respuesta.facturas[0] === "object" &&
-                typeof respuesta.facturas[0].telefono === "string" &&
-                typeof respuesta.facturas[0].telefono1 === "string");
+                typeof respuesta.facturas[0].telefono === "string");
         };
         if (!respuestaValida(data)) {
             throw new Error("La respuesta de la API no es válida");
@@ -43,7 +42,8 @@ function getAllPhone() {
         const telefonos = data.facturas
             .map((factura) => [factura.telefono])
             .flat()
-            .filter((telefono) => telefono);
+            .filter((telefono) => telefono)
+            .map((telefono) => telefono.replace(/\s+/g, '').replace(/^57/, '+57'));
         return telefonos;
     });
 }
