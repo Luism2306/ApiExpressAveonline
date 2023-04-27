@@ -1,0 +1,39 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Click {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    factura   Factura @relation(fields: [facturaId], references: [id])
+    facturaId Int
+}
+
+model Factura {
+    id         Int      @id @default(autoincrement())
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+    id_factura String
+
+    clicks Click[]
+
+    user   User @relation(fields: [userId], references: [id])
+    userId Int
+}
+
+model User {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    name     String?   @default("")
+    
+    facturas Factura[]
+}

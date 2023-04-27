@@ -43,7 +43,7 @@ export async function getAllPhone(): Promise<string[]> {
   .map((factura) => [factura.telefono]) 
   .flat()
   .filter((telefono) => telefono)
-  .map((telefono) => telefono.replace(/\s+/g, '').replace(/^57/, '+57'));
-
-  return telefonos;
+  .map((telefono) => "57"+telefono.replace(/[^0-9]/g, '').replace(/^57/, ''));
+  const telefonosSinDu = [...new Set(telefonos)];
+  return telefonosSinDu;
 }
