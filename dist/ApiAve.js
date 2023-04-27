@@ -47,7 +47,7 @@ app.get('/phone', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 app.get('/send-emails', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield (0, SendEmail_1.sendEmails)();
+        yield (0, SendEmail_1.sendEmailsFacturas)();
         res.send('Todos los correos electrónicos han sido enviados exitosamente.');
     }
     catch (error) {
@@ -57,7 +57,7 @@ app.get('/send-emails', (req, res) => __awaiter(void 0, void 0, void 0, function
 }));
 app.get('/send-sms', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield (0, SendPhones_1.sendSMSs)();
+        yield (0, SendPhones_1.sendSmssFacturas)();
         res.send('Todos los sms han sido enviados exitosamente.');
     }
     catch (error) {

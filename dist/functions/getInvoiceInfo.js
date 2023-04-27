@@ -12,9 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllPhone = void 0;
+exports.getInvoiceInfo = void 0;
 const axios_1 = __importDefault(require("axios"));
-function getAllPhone() {
+function getInvoiceInfo() {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield axios_1.default.post("https://app.aveonline.co/api/comunes/v1.0/administrativo/cartera.php", {
             tipo: "cargarCartera",
@@ -29,23 +29,12 @@ function getAllPhone() {
                 "Content-Type": "application/json",
             },
         });
-        const data = response.data;
-        const respuestaValida = (respuesta) => {
-            return (typeof respuesta === "object" &&
-                Array.isArray(respuesta.facturas) &&
-                typeof respuesta.facturas[0] === "object" &&
-                typeof respuesta.facturas[0].telefono === "string" &&
-                typeof respuesta.facturas[0].telefono1 === "string");
-        };
-        if (!respuestaValida(data)) {
+        const responseData = response.data;
+        if (!responseData || !Array.isArray(responseData.facturas)) {
             throw new Error("La respuesta de la API no es válida");
         }
-        const telefonos = data.facturas
-            .map((factura) => [factura.telefono])
-            .flat()
-            .filter((telefono) => telefono);
-        return telefonos;
+        return responseData.facturas;
     });
 }
-exports.getAllPhone = getAllPhone;
-//# sourceMappingURL=getAllPhone.js.map
+exports.getInvoiceInfo = getInvoiceInfo;
+//# sourceMappingURL=getInvoiceInfo.js.map

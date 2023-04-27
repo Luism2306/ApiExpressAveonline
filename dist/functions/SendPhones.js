@@ -12,48 +12,74 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendSMSs = exports.sendSMS = void 0;
+exports.sendSmssFacturas = exports.sendEmailFacturas = exports.sendSms = void 0;
 const axios_1 = __importDefault(require("axios"));
-const getAllPhone_1 = require("./getAllPhone");
-function sendSMS({ phone }) {
+const getInvoiceInfo_1 = require("./getInvoiceInfo");
+function sendSms({ telefono, html, }) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const phones = yield (0, getAllPhone_1.getAllPhone)();
+            const bodyTemplate = `
+    <div>
+      ${html}
+    </div>
+`;
             const payload = {
-                to: [phone],
-                body: "Has generado un nuevo envio, para verlo ingresa a https://aveonline.co/",
+                to: telefono,
+                body: bodyTemplate,
             };
             yield axios_1.default.post("https://notificaciones.api.aveonline.co/api/v1/sms/send", payload, {
                 headers: {
                     "Content-Type": "application/json",
-                    Accept: "application/json",
+                    Accept: "application/json"
                 },
             });
-            console.log("Mensaje de texto enviado exitosamente a todos los teléfonos.");
+            console.log(`Mensaje enviado a: ${telefono}`);
         }
         catch (error) {
             console.error(error);
-            throw new Error("Error enviando mensaje de texto");
+            throw new Error("Error enviando Mensajes");
         }
     });
 }
-exports.sendSMS = sendSMS;
-function sendSMSs() {
+exports.sendSms = sendSms;
+function sendEmailFacturas({ nit, prefijoFactura, cliente, telefono, numeroFactura, correocliente, }) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const phones = yield (0, getAllPhone_1.getAllPhone)();
-            for (const phone of phones) {
-                yield sendSMS({
-                    phone: [phone],
-                });
-            }
-            console.log("Mensaje de texto enviado exitosamente a todos los teléfonos.");
+            const html = `
+      <p>Estimado ${cliente} ,</p>
+      <p>Le queremos recordar que su facura ${numeroFactura}</p>
+      <p>Se encuentra pendiente </p>
+      <p>Atentamente,</p>
+      <p>El equipo de Aveonline</p>
+      <p>El equipo de Aveonline</p>
+  `;
+            yield sendSms({
+                telefono: telefono,
+                html,
+            });
+            console.log(`Mensaje enviado a: ${telefono}`);
         }
         catch (error) {
             console.error(error);
-            throw new Error("Error enviando mensaje de texto");
+            throw new Error("Error enviando Mensaje");
         }
     });
 }
-exports.sendSMSs = sendSMSs;
+exports.sendEmailFacturas = sendEmailFacturas;
+function sendSmssFacturas() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const facturas = yield (0, getInvoiceInfo_1.getInvoiceInfo)();
+            for (const factura of facturas) {
+                yield sendEmailFacturas(Object.assign({}, factura));
+            }
+            console.log("Todos los correos mensajes han sido enviados exitosamente.");
+        }
+        catch (error) {
+            console.error(error);
+            throw new Error("Error enviando mensajes");
+        }
+    });
+}
+exports.sendSmssFacturas = sendSmssFacturas;
 //# sourceMappingURL=SendPhones.js.map

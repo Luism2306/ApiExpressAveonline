@@ -2,8 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { getAllEmails } from './functions/getAllEmail';
 import { getAllPhone } from './functions/getAllPhone';
-import { sendEmails } from './functions/SendEmail';
-import { sendSMSs } from './functions/SendPhones';
+import { sendEmailsFacturas } from './functions/SendEmail';
+import { sendSmssFacturas } from './functions/SendPhones';
 
 const app = express();
 
@@ -37,7 +37,7 @@ app.get('/phone', async (req, res) => {
 
 app.get('/send-emails', async (req, res) => {
   try {
-    await sendEmails();
+    await sendEmailsFacturas();
     res.send('Todos los correos electrónicos han sido enviados exitosamente.');
   } catch (error) {
     console.error(error);
@@ -47,7 +47,7 @@ app.get('/send-emails', async (req, res) => {
 
 app.get('/send-sms', async (req, res) => {
   try {
-    await sendSMSs();
+    await sendSmssFacturas();
     res.send('Todos los sms han sido enviados exitosamente.');
   } catch (error) {
     console.error(error);

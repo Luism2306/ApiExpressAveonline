@@ -1,9 +1,8 @@
 import axios from "axios";
 
-interface Respuesta {
+export interface Respuesta {
   facturas: {
     telefono: string;
-    telefono1: string; 
   }[];
 }
 
@@ -15,7 +14,7 @@ export async function getAllPhone(): Promise<string[]> {
       fechaInicial: "",
       fechaFinal: "",
       prefijo: "",
-      edad: "",
+      edad: "mas90",
       factura: "",
       nit: "",
     },
@@ -42,7 +41,7 @@ export async function getAllPhone(): Promise<string[]> {
   }
 
   const telefonos = data.facturas
-    .map((factura) => [factura.telefono, factura.telefono1]) 
+    .map((factura) => [factura.telefono]) 
     .flat()
     .filter((telefono) => telefono);
 

@@ -16,18 +16,18 @@ exports.getAllEmails = void 0;
 const axios_1 = __importDefault(require("axios"));
 function getAllEmails() {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield axios_1.default.post('https://app.aveonline.co/api/comunes/v1.0/administrativo/cartera.php', {
-            "tipo": "cargarCartera",
-            "fechaInicial": "",
-            "fechaFinal": "",
-            "prefijo": "",
-            "edad": "",
-            "factura": "",
-            "nit": ""
+        const response = yield axios_1.default.post("https://app.aveonline.co/api/comunes/v1.0/administrativo/cartera.php", {
+            tipo: "cargarCartera",
+            fechaInicial: "",
+            fechaFinal: "",
+            prefijo: "",
+            edad: "mas90",
+            factura: "",
+            nit: "",
         }, {
             headers: {
-                'Content-Type': 'application/json'
-            }
+                "Content-Type": "application/json",
+            },
         });
         const data = response.data;
         const respuestaValida = (respuesta) => {
@@ -37,9 +37,11 @@ function getAllEmails() {
                 typeof respuesta.facturas[0].correocliente === "string");
         };
         if (!respuestaValida(data)) {
-            throw new Error('La respuesta de la API no es válida');
+            throw new Error("La respuesta de la API no es válida");
         }
-        const emails = data.facturas.map(factura => factura.correocliente).filter(email => email);
+        const emails = data.facturas
+            .map((factura) => factura.correocliente)
+            .filter((email) => email);
         return emails;
     });
 }

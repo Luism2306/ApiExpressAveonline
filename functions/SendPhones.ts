@@ -1,16 +1,27 @@
 import axios from "axios";
 import { getAllPhone } from "./getAllPhone";
+import { Factura, getInvoiceInfo } from "./getInvoiceInfo";
 
-interface SendPhonePayload {
-  phone: string[];
+
+export interface sendSmsProps {
+  html: string;
+  telefono:string;
 }
 
-export async function sendSMS({ phone }: SendPhonePayload): Promise<void> {
+export async function sendSms({
+  telefono,
+  html,
+}: sendSmsProps): Promise<void> {
   try {
-    const phones = await getAllPhone();
+    const bodyTemplate = `
+    <div>
+      ${html}
+    </div>
+`;
+
     const payload = {
-      to: [phone],
-      body: "Has generado un nuevo envio, para verlo ingresa a https://aveonline.co/",
+      to: telefono,
+      body: bodyTemplate,
     };
     await axios.post(
       "https://notificaciones.api.aveonline.co/api/v1/sms/send",
@@ -18,33 +29,74 @@ export async function sendSMS({ phone }: SendPhonePayload): Promise<void> {
       {
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          Accept: "application/json"
         },
       }
     );
-    console.log("Mensaje de texto enviado exitosamente a todos los teléfonos.");
+    console.log(`Mensaje enviado a: ${telefono}`);
   } catch (error) {
     console.error(error);
-    throw new Error("Error enviando mensaje de texto");
+    throw new Error("Error enviando Mensajes");
   }
 }
 
-interface SendPhonesPayload {
-  to: string[];
-  body: string;
+
+export interface SendSmsPayload extends Factura {}
+
+export async function sendEmailFacturas({
+  nit,
+  prefijoFactura,
+  cliente,
+  telefono,
+  numeroFactura,
+  correocliente,
+}: SendSmsPayload): Promise<void> {
+  try {
+    const html = `
+      <p>Estimado ${cliente} ,</p>
+      <p>Le queremos recordar que su facura ${numeroFactura}</p>
+      <p>Se encuentra pendiente </p>
+      <p>Atentamente,</p>
+      <p>El equipo de Aveonline</p>
+      <p>El equipo de Aveonline</p>
+  `;
+
+    await sendSms({
+      telefono: telefono,
+      html,
+    });
+    console.log(`Mensaje enviado a: ${telefono}`);
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error enviando Mensaje");
+  }
 }
 
-export async function sendSMSs(): Promise<void> {
+
+export async function sendSmssFacturas(): Promise<void> {
   try {
-    const phones = await getAllPhone();
-    for (const phone of phones) {
-      await sendSMS({
-        phone: [phone],
+    const facturas = await getInvoiceInfo();
+    for (const factura of facturas) {
+      await sendEmailFacturas({
+        ...factura,
       });
     }
-    console.log("Mensaje de texto enviado exitosamente a todos los teléfonos.");
+    console.log(
+      "Todos los correos mensajes han sido enviados exitosamente."
+    );
   } catch (error) {
     console.error(error);
-    throw new Error("Error enviando mensaje de texto");
+    throw new Error("Error enviando mensajes");
   }
 }
+
+
+
+
+
+
+
+
+
+
+
