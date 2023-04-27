@@ -55,7 +55,7 @@ export async function sendEmailFacturas({
 }: SendEmailPayload): Promise<void> {
   try {
     const html = `
-    <div style="font-family: 'Open Sans',sans-serif; display:flex;margin:0 auto; justify-content: center;">
+    <div style="font-family: 'Open Sans',sans-serif; display:flex;margin:0 auto; justify-content: center !important;">
     <div style="width:600px;border-radius:10px;background:#ffffff;padding-bottom:32px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #EBEBEB;
         box-shadow: 0px 2px 10px 0px rgb(0 0 0 / 6%);">
         <div
@@ -74,7 +74,8 @@ export async function sendEmailFacturas({
                     style="font-style:normal;margin-top:40px;width:518px;height:54px;font-weight:400;font-size:16px;line-height:20px;color:#4a4f54; display: flex; justify-content: center;">
                     Te invitamos a ponerte al día con tus factura ${factura}
                 </p>
-                <a href="">
+               <a href={'https://aveonline-facturas.vercel.app/?nit=${nit}&prefijoFactura=${prefijoFactura}&numeroFactura=${numeroFactura}'}>
+
                     <button style="cursor: pointer; margin-top: 58px;
                         width: 514px;
                         height: 56px;

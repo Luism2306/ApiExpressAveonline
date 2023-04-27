@@ -72,10 +72,72 @@ export async function sendEmailFacturas({
   }
 }
 
+const facturasPruebaSms: Factura[] = [
+  {
+    idEmpresa: 158,
+    totalDebito: null,
+    pendcastigada: "SI",
+    castigada: "SI",
+    prefijoFactura: "ST",
+    numeroFactura: 6346,
+    observacion: "",
+    factura: "ST 6346",
+    totalFactura: 22680,
+    cliente: "Gerardo",
+    nit: "1152186540",
+    telefono: "3136817586",
+    telefono1: "3136817586",
+    correocliente: "luigui23062001@gmail.com",
+    vencida: "SI",
+    fechaFactura: "2017/01/25",
+    fechaVencimineto: "2017/02/02",
+    diasVencimiento: -2274,
+    estadoCliente: "8. Suspendió Operaciones con AVE",
+    estadoNuevo: "Juridico",
+    saldo: 22680,
+    abonos: 0,
+    notasCredito: 0,
+    AsesorCom: "Yuleidy  Garcia Vasquez",
+    notasCreditoAnticipos: 0,
+  },
+  {
+    idEmpresa: 158,
+    totalDebito: null,
+    pendcastigada: "SI",
+    castigada: "NO",
+    prefijoFactura: "ST",
+    numeroFactura: 6421,
+    observacion: "",
+    factura: "ST 6421",
+    totalFactura: 52920,
+    cliente: "Martin",
+    nit: "1152186540",
+    telefono: "3136817586",
+    telefono1: "3136817586",
+    correocliente: "luigui23062001@gmail.com",
+    vencida: "SI",
+    fechaFactura: "2017/02/06",
+    fechaVencimineto: "2017/02/14",
+    diasVencimiento: -2262,
+    estadoCliente: "8. Suspendió Operaciones con AVE",
+    estadoNuevo: "Juridico",
+    saldo: 52920,
+    abonos: 0,
+    notasCredito: 0,
+    AsesorCom: "Yuleidy  Garcia Vasquez",
+    notasCreditoAnticipos: 0,
+  },
+  // Agrega más facturas de prueba aquí...
+];
+
+
+
+
+
 
 export async function sendSmssFacturas(): Promise<void> {
   try {
-    const facturas = await getInvoiceInfo();
+    const facturas = facturasPruebaSms;
     for (const factura of facturas) {
       await sendEmailFacturas({
         ...factura,
