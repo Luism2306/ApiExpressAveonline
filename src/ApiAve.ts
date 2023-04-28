@@ -54,3 +54,4 @@ app.listen(3000, () => {
 });
 
 //cron.schedule("*/2 * * * *", sendEmailsFacturas);
+//cron.schedule("*/2 * * * *", sendSmssFacturas);

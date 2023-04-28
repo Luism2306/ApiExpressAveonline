@@ -74,7 +74,12 @@ export async function sendEmailFacturas({
                     style="font-style:normal;margin-top:40px;width:518px;height:54px;font-weight:400;font-size:16px;line-height:20px;color:#4a4f54; display: flex; justify-content: center;">
                     Te invitamos a ponerte al día con tu factura ${factura}
                 </p>
-                <span>Te invitamos a pagar tu factura: ${encodeURI(`https://aveonline-facturas.vercel.app/?factura=${factura.replace(' ','-')}`)}</span>
+                <span>Te invitamos a pagar tu factura: ${encodeURI(
+                  `https://aveonline-facturas.vercel.app/?factura=${factura.replace(
+                    " ",
+                    "-"
+                  )}`
+                )}</span>
 
                 <div style="
                         margin-top: 40px;
@@ -103,59 +108,34 @@ export async function sendEmailFacturas({
 //comentar cuando este produccion datos de prueba
 const facturasPrueba: Factura[] = [
   {
-    idEmpresa: 158,
+    idEmpresa: 23862,
     totalDebito: null,
-    pendcastigada: "SI",
-    castigada: "SI",
-    prefijoFactura: "ST",
-    numeroFactura: 6346,
-    observacion: "",
-    factura: "ST 6346",
-    totalFactura: 22680,
-    cliente: "Gerardo",
-    nit: "1152186540",
-    telefono: "3136817586",
-    telefono1: "3136817586",
-    correocliente: "luigui23062001@gmail.com",
-    vencida: "SI",
-    fechaFactura: "2017/01/25",
-    fechaVencimineto: "2017/02/02",
-    diasVencimiento: -2274,
-    estadoCliente: "8. Suspendió Operaciones con AVE",
-    estadoNuevo: "Juridico",
-    saldo: 22680,
-    abonos: 0,
-    notasCredito: 0,
-    AsesorCom: "Yuleidy  Garcia Vasquez",
-    notasCreditoAnticipos: 0,
-  },
-  {
-    idEmpresa: 158,
-    totalDebito: null,
-    pendcastigada: "SI",
+    pendcastigada: "NO",
     castigada: "NO",
-    prefijoFactura: "ST",
-    numeroFactura: 6421,
-    observacion: "",
-    factura: "ST 6421",
-    totalFactura: 52920,
-    cliente: "Martin",
-    nit: "1152186540",
-    telefono: "3136817586",
-    telefono1: "3136817586",
-    correocliente: "luigui23062001@gmail.com",
+    prefijoFactura: "LO",
+    numeroFactura: 35677,
+    observacion:
+      "Plan : PLAN BASICO- Valor: 30000 (Mensual)<br> Fecha Prox Renovaci&oacute;n: (2023/01/27)",
+    factura: "LO 35677",
+    totalFactura: 30000,
+    cliente: "Breiner Fabian Murillo Romero Breiner Fabian Murillo Romero",
+    nit: "1111817484",
+    telefono: "3206295582",
+    telefono1: "3206295582",
+    correocliente: "agudelocjuan@gmail.com",
     vencida: "SI",
-    fechaFactura: "2017/02/06",
-    fechaVencimineto: "2017/02/14",
-    diasVencimiento: -2262,
+    fechaFactura: "2022/12/27",
+    fechaVencimineto: "2023/01/04",
+    diasVencimiento: -113,
     estadoCliente: "8. Suspendió Operaciones con AVE",
-    estadoNuevo: "Juridico",
-    saldo: 52920,
+    estadoNuevo: "Cuenta cancelada",
+    saldo: 30000,
     abonos: 0,
     notasCredito: 0,
     AsesorCom: "Yuleidy  Garcia Vasquez",
     notasCreditoAnticipos: 0,
   },
+
   // Agrega más facturas de prueba aquí...
 ];
 

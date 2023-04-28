@@ -2,25 +2,21 @@ import axios from "axios";
 import { getAllPhone } from "./getAllPhone";
 import { Factura, getInvoiceInfo } from "./getInvoiceInfo";
 
-
 export interface sendSmsProps {
   html: string;
-  telefono:string;
+  telefono: string;
 }
 
-export async function sendSms({
-  telefono,
-  html,
-}: sendSmsProps): Promise<void> {
+export async function sendSms({ telefono, html }: sendSmsProps): Promise<void> {
   try {
     const bodyTemplate = `
-    <div>
+ 
       ${html}
-    </div>
+    
 `;
 
     const payload = {
-      to: telefono,
+      to: [telefono],
       body: bodyTemplate,
     };
     await axios.post(
@@ -29,7 +25,7 @@ export async function sendSms({
       {
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json"
+          Accept: "application/json",
         },
       }
     );
@@ -40,30 +36,35 @@ export async function sendSms({
   }
 }
 
-
 export interface SendSmsPayload extends Factura {}
 
-export async function sendEmailFacturas({
+export async function sendSmsFacturas({
   nit,
   prefijoFactura,
   cliente,
   telefono,
+  factura,
   numeroFactura,
   correocliente,
 }: SendSmsPayload): Promise<void> {
   try {
     const html = `
-      <p>Estimado ${cliente} ,</p>
-      <p>Le queremos recordar que su facura ${numeroFactura}</p>
-      <p>Se encuentra pendiente </p>
-      <p>Atentamente,</p>
-      <p>El equipo de Aveonline</p>
-      <p>El equipo de Aveonline</p>
+      Estimado ${cliente} ,Le queremos recordar que su factura ${encodeURI(
+      `https://aveonline-facturas.vercel.app/?factura=${factura.replace(
+        " ",
+        "-"
+      )}`
+    )}
   `;
 
     await sendSms({
       telefono: telefono,
-      html,
+      html:`Estimado ${cliente} ,Le queremos recordar que su factura ${encodeURI(
+        `https://aveonline-facturas.vercel.app/?factura=${factura.replace(
+          " ",
+          "-"
+        )}`
+      )}`,
     });
     console.log(`Mensaje enviado a: ${telefono}`);
   } catch (error) {
@@ -74,91 +75,46 @@ export async function sendEmailFacturas({
 
 const facturasPruebaSms: Factura[] = [
   {
-    idEmpresa: 158,
+    idEmpresa: 23862,
     totalDebito: null,
-    pendcastigada: "SI",
-    castigada: "SI",
-    prefijoFactura: "ST",
-    numeroFactura: 6346,
-    observacion: "",
-    factura: "ST 6346",
-    totalFactura: 22680,
-    cliente: "Gerardo",
-    nit: "1152186540",
-    telefono: "573223173104",
-    telefono1: "3136817586",
-    correocliente: "luigui23062001@gmail.com",
-    vencida: "SI",
-    fechaFactura: "2017/01/25",
-    fechaVencimineto: "2017/02/02",
-    diasVencimiento: -2274,
-    estadoCliente: "8. Suspendió Operaciones con AVE",
-    estadoNuevo: "Juridico",
-    saldo: 22680,
-    abonos: 0,
-    notasCredito: 0,
-    AsesorCom: "Yuleidy  Garcia Vasquez",
-    notasCreditoAnticipos: 0,
-  },
-  {
-    idEmpresa: 158,
-    totalDebito: null,
-    pendcastigada: "SI",
+    pendcastigada: "NO",
     castigada: "NO",
-    prefijoFactura: "ST",
-    numeroFactura: 6421,
-    observacion: "",
-    factura: "ST 6421",
-    totalFactura: 52920,
-    cliente: "Martin",
-    nit: "1152186540",
-    telefono: "573223173104",
-    telefono1: "3136817586",
-    correocliente: "luigui23062001@gmail.com",
+    prefijoFactura: "LO",
+    numeroFactura: 35677,
+    observacion:
+      "Plan : PLAN BASICO- Valor: 30000 (Mensual)<br> Fecha Prox Renovaci&oacute;n: (2023/01/27)",
+    factura: "LO 35677",
+    totalFactura: 30000,
+    cliente: "Breiner Fabian Murillo Romero Breiner Fabian Murillo Romero",
+    nit: "1111817484",
+    telefono: "573147992263",
+    telefono1: "3206295582",
+    correocliente: "agudelocjuan@gmail.com",
     vencida: "SI",
-    fechaFactura: "2017/02/06",
-    fechaVencimineto: "2017/02/14",
-    diasVencimiento: -2262,
+    fechaFactura: "2022/12/27",
+    fechaVencimineto: "2023/01/04",
+    diasVencimiento: -113,
     estadoCliente: "8. Suspendió Operaciones con AVE",
-    estadoNuevo: "Juridico",
-    saldo: 52920,
+    estadoNuevo: "Cuenta cancelada",
+    saldo: 30000,
     abonos: 0,
     notasCredito: 0,
     AsesorCom: "Yuleidy  Garcia Vasquez",
     notasCreditoAnticipos: 0,
   },
-  // Agrega más facturas de prueba aquí...
 ];
-
-
-
-
-
 
 export async function sendSmssFacturas(): Promise<void> {
   try {
     const facturas = facturasPruebaSms;
     for (const factura of facturas) {
-      await sendEmailFacturas({
+      await sendSmsFacturas({
         ...factura,
       });
     }
-    console.log(
-      "Todos los correos mensajes han sido enviados exitosamente."
-    );
+    console.log("Todos los correos mensajes han sido enviados exitosamente.");
   } catch (error) {
     console.error(error);
     throw new Error("Error enviando mensajes");
   }
 }
-
-
-
-
-
-
-
-
-
-
-
