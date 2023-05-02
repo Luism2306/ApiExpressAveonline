@@ -14,7 +14,7 @@ app.use(router);
 app.get("/facturas", async (req, res) => {
   try {
     const facturas = await getInvoiceInfo("cliente", "factura", 1000);
-    console.log(facturas);
+    console.log(getInvoiceInfo);
     res.json(facturas);
   } catch (error) {
     console.error(error);
