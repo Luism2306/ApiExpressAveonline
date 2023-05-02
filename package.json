@@ -4,9 +4,9 @@
   "description": "",
   "scripts": {
     "start": "node ./dist/index.js",
-    "dev":"nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node index.ts'",
+    "dev": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node index.ts'",
     "build": "tsc --module commonjs",
-    "prisma-deploy":"npx prisma migrate dev"
+    "prisma-deploy": "npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "body-parser": "^1.20.2",
     "core-js": "^3.30.1",
     "express": "^4.18.2",
+    "moment": "^2.29.4",
     "node-cron": "^3.0.2",
     "node-fetch": "^3.3.1",
     "prisma": "^4.13.0",
