@@ -1,7 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cron from "node-cron";
-import { sendEmailFacturas, sendEmailFacturasPrueba } from "./functions/SendEmail";
+import {
+  sendEmailFacturas,
+  sendEmailFacturasPruebas,
+} from "./functions/SendEmail";
 import { sendSmssFacturas } from "./functions/SendPhones";
 import { getInvoiceInfo } from "./functions/getInvoiceInfo";
 
@@ -14,7 +17,7 @@ app.use(router);
 app.get("/facturas", async (req, res) => {
   try {
     const facturas = await getInvoiceInfo("cliente", "factura", 1000);
-    console.log(getInvoiceInfo);
+
     res.json(facturas);
   } catch (error) {
     console.error(error);
@@ -24,7 +27,7 @@ app.get("/facturas", async (req, res) => {
 
 app.get("/send-emails", async (req, res) => {
   try {
-    await sendEmailFacturasPrueba();
+    await sendEmailFacturasPruebas();
     res.send("Todos los correos han sido enviados exitosamente.");
   } catch (error) {
     console.error(error);
