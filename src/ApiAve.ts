@@ -5,7 +5,7 @@ import {
   sendEmailFacturas,
   sendEmailFacturasPruebas,
 } from "./functions/SendEmail";
-import { sendSmssFacturas } from "./functions/SendPhones";
+import { sendSmsFacturasPruebas } from "./functions/SendPhones";
 import { getInvoiceInfo } from "./functions/getInvoiceInfo";
 
 import router from "./routes";
@@ -38,7 +38,7 @@ app.get("/send-emails", async (req, res) => {
 //Lista de mensajes a los clientes
 app.get("/send-sms", async (req, res) => {
   try {
-    await sendSmssFacturas();
+    await sendSmsFacturasPruebas();
     res.send("Todos los sms han sido enviados exitosamente.");
   } catch (error) {
     console.error(error);

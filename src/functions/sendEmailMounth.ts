@@ -8,20 +8,20 @@ export const emailDay_Mounth_html = ({
   factura,
 }: sendEmailDay_MounthProps) => {
   const html = `
-  <div style="font-family: 'Open Sans',sans-serif; display:flex;margin:0 auto; justify-content: center !important;">
+  <div style="font-family: 'Open Sans',sans-serif; margin:0 auto; justify-content: center !important;">
   <div style="width:600px;border-radius:10px;background:#ffffff;padding-bottom:32px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #EBEBEB;
   box-shadow: 0px 2px 10px 0px rgb(0 0 0 / 6%);">
       <div
           style="padding-left:0!important;height:12px;background:linear-gradient(296.48deg,#ac24f1 46.11%,#ff585d 97.89%);border-radius:10px 10px 0px 0px ; ">
       </div>
-      <div style="padding-left:43px">
-          <div>
+      <div style="padding:40px;">
+          <div style="margin-top:40px;margin-bottom:32px;width: 512px;margin: 20px auto;">
               <div style="text-align:center;margin-top:28px">
                   <img src="https://ci5.googleusercontent.com/proxy/x0e9U7KINSRr1XLqN5aVwXwodKVG4cdcsvQdG6SqrSKRBIEb_OhmTqzPzWcKLjbFpGzQV-uJyri7RJZc9oQJAdnvyTEWq1fiAkA=s0-d-e1-ft#https://app.aveonline.co/assets/img/mano-onboarding.png"
                       alt="" class="CToWUd" data-bit="iit">
               </div>
 
-              <span>${factura.cliente} nuevamente te notificamos que la factura ${factura.factura} por valor
+              <span style="margin:20px 0px;color:#222;">${factura.cliente} nuevamente te notificamos que la factura ${factura.factura} por valor
                   ${factura.saldo} está pendiente de pago presentando una demora superior a 30 días. Es necesario que
                   canceles tu obligación de manera inmediata para que evites el traslado de tu deuda a cobranza
                   prejurídica. Aveonline. Si tienes alguna duda <a
@@ -31,7 +31,7 @@ export const emailDay_Mounth_html = ({
                   margin-top: 40px;
                   margin-bottom: 32px;
                   border: 1px solid #dcdcdc;
-                  width: 514px"></div>
+                  width: 514px; margin:20px auto;"></div>
           </div>
       </div>
 
