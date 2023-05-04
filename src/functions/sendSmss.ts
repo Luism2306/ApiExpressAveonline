@@ -1,17 +1,18 @@
 import axios from "axios";
 export interface sendSmsProps {
-    body: string;
-    to: [string];
-  
+  html: string;
+  telefono: string;
 }
 
-export async function sendSms({ body, to }: sendSmsProps): Promise<void> {
+export async function sendSms({ 
+  html, telefono
+ }: sendSmsProps): Promise<void> {
   try {
-    const bodyTemplate = `${body}`;
+    const htmlTemplate = `${html}`;
 
     const payload = {
-      to: ["573223173104"],
-      body: bodyTemplate,
+      to: [telefono],
+      body: htmlTemplate,
     };
     await axios.post(
       "https://notificaciones.api.aveonline.co/api/v1/sms/send",
@@ -23,7 +24,6 @@ export async function sendSms({ body, to }: sendSmsProps): Promise<void> {
         },
       }
     );
-    //console.log(`Correo electrónico enviado a: ${email}`);
   } catch (error) {
     console.error(error);
     throw new Error("Error enviando SMS");

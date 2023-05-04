@@ -12,9 +12,8 @@ export async function sendEmail({
 }: sendEmailProps): Promise<void> {
   try {
     const bodyTemplate = `${html}`;
-
     const payload = {
-      to: "luigui23062001@gmail.com",
+      to: email,
       subject,
       body: bodyTemplate,
     };

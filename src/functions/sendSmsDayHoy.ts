@@ -4,7 +4,7 @@ import { sendSms } from "./sendSmss";
 export interface sendSmsDay_hoyProps {
   factura: Factura;
 }
-export const emailDay_hoy_html = ({
+export const smsDay_hoy_html = ({
   factura,
 }: sendSmsDay_hoyProps) => {
   const html = `
@@ -17,7 +17,7 @@ export const emailDay_hoy_html = ({
           " ",
           "-"
         )}`
-      )} para que lo realices oportunamente.Si ya pagaste o tienes dineros pendientes por reembolsar de los dineros recaudados haz caso omiso. Aveonline. Si tienes alguna duda, <a src="https://web.whatsapp.com/send?phone=573233162889&text=Hola%2C%20estaba%20en%20https%3A%2F%2Faveonline.co%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n.">contactanos</a>
+      )} .para que lo realices oportunamente. Si ya pagaste o tienes dineros pendientes por reembolsar de los dineros recaudados haz caso omiso. Aveonline. Si tienes alguna duda, contactanos https://wa.link/eh4uqu .
               
 `;
   return html;
@@ -25,9 +25,9 @@ export const emailDay_hoy_html = ({
 export const sendSmsDay_hoy = async ({
   factura,
 }: sendSmsDay_hoyProps) => {
-  const html = emailDay_hoy_html({ factura });
+  const html = smsDay_hoy_html({ factura });
   await sendSms({
-    to: [factura.telefono],
-    body: html,
+    telefono: factura.telefono,
+    html,
   });
 };
