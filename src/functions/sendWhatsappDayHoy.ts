@@ -8,6 +8,11 @@ export interface sendWhatsappDay_hoyProps {
 export const sendWhatsappDay_hoy = async ({
   factura,
 }: sendWhatsappDay_hoyProps) => {
+  const saldoFormatted = new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+  }).format(factura.saldo);
+
   await sendWhatsapp({
     phone: factura.telefono,
     type: "template",
@@ -21,7 +26,7 @@ export const sendWhatsappDay_hoy = async ({
             {
               type: "image",
               image: {
-                link:"https://pps.whatsapp.net/v/t61.24694-24/340571318_4783301751793692_5081658987458736009_n.jpg?ccb=11-4&oh=01_AdTyHvSIohFMMC7f0-SBhr6queuIiumwVILRnTqoVRrnIQ&oe=6468B544",
+                link: "https://pps.whatsapp.net/v/t61.24694-24/340571318_4783301751793692_5081658987458736009_n.jpg?ccb=11-4&oh=01_AdTyHvSIohFMMC7f0-SBhr6queuIiumwVILRnTqoVRrnIQ&oe=6468B544",
               },
             },
           ],
@@ -31,12 +36,8 @@ export const sendWhatsappDay_hoy = async ({
           parameters: [
             { type: "text", text: factura.factura },
             {
-              type: "currency",
-              currency: {
-                fallback_value: "100",
-                code: "COP",
-                amount_1000: factura.saldo,
-              },
+              type: "text",
+              text: saldoFormatted,
             },
             {
               type: "text",

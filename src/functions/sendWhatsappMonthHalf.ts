@@ -8,6 +8,11 @@ export interface sendWhatsappDay_MonthHalfProps {
 export const sendWhatsappDay_MonthHalf = async ({
   factura,
 }: sendWhatsappDay_MonthHalfProps) => {
+  const saldoFormatted = new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+  }).format(factura.saldo);
+
   await sendWhatsapp({
     phone: factura.telefono,
     type: "template",
@@ -32,12 +37,8 @@ export const sendWhatsappDay_MonthHalf = async ({
               text: factura.factura,
             },
             {
-              type: "currency",
-              currency: {
-                fallback_value: "$100.99",
-                code: "COP",
-                amount_1000: factura.saldo,
-              },
+              type: "text",
+              text:saldoFormatted
             },
             {
               type: "text",
