@@ -24,8 +24,8 @@ export async function sendWhatsappFacturasPruebas(): Promise<void> {
       numeroFactura: 35677,
       saldo: 30000,
       correocliente: "luigui23062001@gmail.com",
-      fechaVencimineto:"2023/05/11",
-      telefono:"573223173104",
+      fechaVencimineto:"2023/05/10",
+      telefono:"573127445632",
     },
   ];
   await sendWhatsappFacturas({facturas})
