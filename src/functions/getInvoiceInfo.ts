@@ -36,7 +36,7 @@ export interface ResponseData {
 export async function getInvoiceInfo(
   cliente?: string,
   factura?: string,
-  saldo?:number,
+  saldo?: number,
 ): Promise<Factura[]> {
   const response = await axios.post<ResponseData>(
     "https://app.aveonline.co/api/comunes/v1.0/administrativo/cartera.php",
@@ -60,11 +60,21 @@ export async function getInvoiceInfo(
   if (!responseData || !Array.isArray(responseData.facturas)) {
     throw new Error("La respuesta de la API no es válida");
   }
-  const filteredFacturas = responseData.facturas.filter((e) => {
+
+  const modifiedFacturas = responseData.facturas.map((factura) => {
+    // Agregar "57" al comienzo del número de teléfono si no está vacío
+    if (factura.telefono) {
+      factura.telefono = "57" + factura.telefono;
+    }
+    return factura;
+  });
+
+  const filteredFacturas = modifiedFacturas.filter((e) => {
     return isDateMenosDay({
       date: new Date(e.fechaVencimineto),
       menosDias: 357,
     });
   });
+
   return filteredFacturas;
 }

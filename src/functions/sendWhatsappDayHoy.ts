@@ -33,7 +33,7 @@ export const sendWhatsappDay_hoy = async ({
             {
               type: "currency",
               currency: {
-                fallback_value: "$100.99",
+                fallback_value: "100",
                 code: "COP",
                 amount_1000: factura.saldo,
               },
