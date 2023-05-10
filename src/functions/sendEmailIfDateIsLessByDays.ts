@@ -15,20 +15,26 @@ export async function sendEmailIfDateIsLessByDays({
   factura,
 }: sendEmailIfDateIsLessByDaysProps) {
   const fechaVencimiento = new Date(factura.fechaVencimineto);
+  const fechaActual = new Date();
 
-  if (isDateMenosDay({ date: fechaVencimiento, menosDias: -1 })) {
+  const diasDiferencia = Math.floor(
+    (fechaActual.getTime() - fechaVencimiento.getTime()) / (1000 * 3600 * 24)
+  );
+
+  if (diasDiferencia === -1) {
     await sendEmailDay_manana({ factura });
-  } else if (isDateMenosDay({ date: fechaVencimiento, menosDias: 1 })) {
+  } else if (diasDiferencia === 0) {
     await sendEmailDay_hoy({ factura });
-  } else if (isDateMenosDay({ date: fechaVencimiento, menosDias: 15 })) {
+  } else if (diasDiferencia === 15) {
     await sendEmailDay_15({ factura });
-  } else if (isDateMenosDay({ date: fechaVencimiento, menosDias: 30 })) {
+  } else if (diasDiferencia === 30) {
     await sendEmailDay_Mounth({ factura });
-  } else if (isDateMenosDay({ date: fechaVencimiento, menosDias: 45 })) {
+  } else if (diasDiferencia === 45) {
     await sendEmailDay_MonthHalf({ factura });
-  } else if (isDateMenosDay({ date: fechaVencimiento, menosDias: 60 })) {
+  } else if (diasDiferencia === 60) {
     await sendEmailDay_TwoMonth({ factura });
   } else {
     // más de 60
   }
 }
+
