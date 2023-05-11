@@ -1,20 +1,19 @@
 import { Request, Response, NextFunction } from "express";
+import { getInvoiceInfo } from "../../functions/getInvoiceInfo";
 
-export const getListUsers = async (
+export const getListEmails = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const prisma = req["prisma"];
-    const result = await prisma.user.findMany();
+      
+    const emails = await getInvoiceInfo()
 
     return res.status(200).json({
-      result,
+        emails,
     });
   } catch (error) {
-    console.log(error);
-
     return res.status(400).json({
       error,
     });
