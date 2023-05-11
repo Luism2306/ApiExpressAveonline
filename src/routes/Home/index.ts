@@ -1,8 +1,8 @@
 import express from "express";
+
+import {home} from "../../controllers/Home/get"
 const router = express.Router();
 
-router.get("/", function (req, res, next) {
-  res.send("Hola Bienvenido al  Api de envios de sms y correos de Aveonline!");
-});
+router.get("/", home);
 
 export default router;
