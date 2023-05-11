@@ -6,7 +6,11 @@
     "start": "node ./dist/index.js",
     "dev": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node index.ts'",
     "build": "tsc --module commonjs",
-    "prisma-deploy": "npx prisma migrate dev"
+    "prisma-deploy": "npx prisma migrate dev",
+    "n-update":"git pull && npm i && npm run build",
+    "pm2-r":"pm2 startup && pm2 save",
+    "pm2-start":"npm run n-update && pm2 start dist/index.js --name 'api' && npm run pm2-r",
+    "pm2-update":"npm run n-update && pm2 restart api && npm run pm2-r"
   },
   "keywords": [],
   "author": "",
