@@ -11,7 +11,7 @@ export const smsDay_15_html = ({ factura }: sendSmsDay_15Props) => {
   } con vencimiento ${
     factura.fechaVencimineto
   } no se ha efectuado. Te invitamos a ponerte al día con la obligación ${encodeURI(
-    `https://aveonline-facturas.vercel.app/?factura=${factura.factura.replace(
+    `https://cobrocartera.aveonline.co/?factura=${factura.factura.replace(
       " ",
       "-"
     )}`

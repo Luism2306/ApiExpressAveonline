@@ -31,10 +31,13 @@ export const emailDay_Mounth_html = ({
                 <span style="margin:20px 0px;color:#222;">${factura.cliente} nuevamente te notificamos que la factura
                     ${factura.factura} por valor
                     ${factura.saldo} está pendiente de pago presentando una demora superior a 30 días. Es necesario que
-                    canceles tu obligación de manera inmediata para que evites el traslado de tu deuda a cobranza
-                    prejurídica. Aveonline. Si tienes alguna duda <a
-                        src="https://web.whatsapp.com/send?phone=573233162889&text=Hola%2C%20estaba%20en%20https%3A%2F%2Faveonline.co%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n.">contactanos
-                        Aveonline</a></span>
+                    canceles tu obligación de manera inmediata  para que evites el traslado de tu deuda a cobranza
+                    prejurídica.Accede a nuestro medios de pagos ${encodeURI(
+                        `https://cobrocartera.aveonline.co/?factura=${factura.factura.replace(
+                        " ",
+                        "-"
+                        )}`
+                        )} Aveonline. Si tienes alguna duda contactanos Aveonline</span>
                 <div style="
                     margin-top: 40px;
                     margin-bottom: 32px;

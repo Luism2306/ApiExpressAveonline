@@ -12,7 +12,7 @@ export const smsDay_manana_html = ({ factura }: sendSmsDay_mananaProps) => {
   } por valor de ${
     factura.saldo
   } para acceder a los medios de pago visita ${encodeURI(
-    `https://aveonline-facturas.vercel.app/?factura=${factura.factura.replace(
+    `https://cobrocartera.aveonline.co/?factura=${factura.factura.replace(
       " ",
       "-"
     )}`

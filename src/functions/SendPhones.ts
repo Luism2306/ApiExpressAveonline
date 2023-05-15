@@ -24,7 +24,7 @@ export async function sendSmsFacturasPruebas(): Promise<void> {
       numeroFactura: 35677,
       saldo: 100000,
       correocliente: "luigui23062001@gmail.com",
-      fechaVencimineto:"2023/05/05",
+      fechaVencimineto:"2023/05/16",
       telefono:"573223173104",
     },
   ];

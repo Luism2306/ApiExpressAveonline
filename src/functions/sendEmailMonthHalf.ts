@@ -30,12 +30,15 @@ export const emailDay_MonthHalf_html = ({
 
                 <span style="margin:20px 0px;color:#222;">${factura.cliente} No hemos recibido el pago de tu factura
                     ${factura.factura} por valor
-                    ${factura.saldo} que presenta una mora de más de 45 días. Si no confirmamos el pago de tu obligación
+                    ${factura.saldo} que presenta una mora de más de 45 días. Accede a los medios de pago ${encodeURI(
+                        `https://cobrocartera.aveonline.co/?factura=${factura.factura.replace(
+                        " ",
+                        "-"
+                        )}`
+                        )} Si no confirmamos el pago de tu obligación
                     el día de hoy, tu caso será direccionado al departamento de cobranza prejurídica y de ser necesario
                     jurídica donde tendrás entendimiento con nuestros asesores legales. ¡Evíta más gastos! AveOnline. Si
-                    tienes alguna duda <a
-                        src="https://web.whatsapp.com/send?phone=573233162889&text=Hola%2C%20estaba%20en%20https%3A%2F%2Faveonline.co%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n.">contactanos
-                        Aveonline</a></span>
+                    tienes alguna duda contactanos Aveonline</span>
                 <div style="
                         margin-top: 40px;
                         margin-bottom: 32px;

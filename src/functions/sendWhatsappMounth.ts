@@ -49,7 +49,7 @@ export const sendWhatsappDay_Mounth = async ({
             {
               type: "text",
               text: `${encodeURI(
-                `https://aveonline-facturas.vercel.app/?factura=${factura.factura.replace(
+                `https://cobrocartera.aveonline.co/?factura=${factura.factura.replace(
                   " ",
                   "-"
                 )}`

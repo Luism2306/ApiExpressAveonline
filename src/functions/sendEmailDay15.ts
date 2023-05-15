@@ -33,13 +33,11 @@ export const emailDay_15_html = ({ factura }: sendEmailDay_15Props) => {
                     } con vencimiento ${
                     factura.fechaVencimineto
                     } no se ha efectuado. Te invitamos a ponerte al día con la obligación ${encodeURI(
-                    `https://aveonline-facturas.vercel.app/?factura=${factura.factura.replace(
+                    `https://cobrocartera.aveonline.co/?factura=${factura.factura.replace(
                     " ",
                     "-"
                     )}`
-                    )}. Si tienes alguna duda <a
-                        src="https://web.whatsapp.com/send?phone=573233162889&text=Hola%2C%20estaba%20en%20https%3A%2F%2Faveonline.co%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n.">contactanos
-                        Aveonline</a></span>
+                    )}. Si tienes alguna duda contactanos </span>
                 <div style="
                     margin-top: 40px;
                     margin-bottom: 32px;

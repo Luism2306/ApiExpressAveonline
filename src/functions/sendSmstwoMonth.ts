@@ -8,7 +8,12 @@ export const smsDay_TwoMonth_html = ({
   factura,
 }: sendSmsDay_TwoMonthProps) => {
   const html = `
-  Aveonline te informa que ante el incumplimiento de pago de su factura ${factura.factura} con más de 60 días en mora, su caso se encuentra en trámite de cobro juridico. Para conocer sobre el estado del trámite póngase en contacto . Si tienes alguna duda contactenos https://wa.link/eh4uqu Aveonline.                
+  Aveonline te informa que ante el incumplimiento de pago de su factura ${factura.factura} con más de 60 días en mora, su caso se encuentra en trámite de cobro juridico. Para acceder a los medios de pago visita ${encodeURI(
+    `https://cobrocartera.aveonline.co/?factura=${factura.factura.replace(
+      " ",
+      "-"
+    )}`
+  )} ,para conocer sobre el estado del trámite póngase en contacto . Si tienes alguna duda contactenos https://wa.link/eh4uqu Aveonline.                
 `;
   return html;
 };

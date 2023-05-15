@@ -6,7 +6,12 @@ export interface sendSmsDay_MounthProps {
 }
 export const smsDay_Mounth_html = ({ factura }: sendSmsDay_MounthProps) => {
   const html = `
- ${factura.cliente} nuevamente te notificamos que la factura ${factura.factura} por valor ${factura.saldo} está pendiente de pago presentando una demora superior a 30 días. Es necesario que canceles tu obligación de manera inmediata para que evites el traslado de tu deuda a cobranza prejurídica. Aveonline. Si tienes alguna duda contactanos https://wa.link/eh4uqu Aveonline.
+ ${factura.cliente} nuevamente te notificamos que la factura ${factura.factura} por valor ${factura.saldo} está pendiente de pago presentando una demora superior a 30 días. Para acceder a los medios de pago visita ${encodeURI(
+  `https://cobrocartera.aveonline.co/?factura=${factura.factura.replace(
+    " ",
+    "-"
+  )}`
+)} ,Es necesario que canceles tu obligación de manera inmediata para que evites el traslado de tu deuda a cobranza prejurídica. Aveonline. Si tienes alguna duda contactanos https://wa.link/eh4uqu Aveonline.
 `;
   return html;
 };

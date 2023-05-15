@@ -25,16 +25,15 @@ export async function sendEmailIfDateIsLessByDays({
     await sendEmailDay_manana({ factura });
   } else if (diasDiferencia === 0) {
     await sendEmailDay_hoy({ factura });
-  } else if (diasDiferencia === 15) {
+  } else if (diasDiferencia >= 15 && diasDiferencia < 30) {
     await sendEmailDay_15({ factura });
-  } else if (diasDiferencia === 30) {
+  } else if (diasDiferencia >= 30 && diasDiferencia < 45) {
     await sendEmailDay_Mounth({ factura });
-  } else if (diasDiferencia === 45) {
+  } else if (diasDiferencia >= 45 && diasDiferencia < 60) {
     await sendEmailDay_MonthHalf({ factura });
-  } else if (diasDiferencia === 60) {
+  } else if (diasDiferencia >= 60) {
     await sendEmailDay_TwoMonth({ factura });
   } else {
-    // más de 60
+    
   }
 }
-
