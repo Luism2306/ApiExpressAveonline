@@ -13,5 +13,5 @@ router.get("/send-sms", async (req, res) => {
   }
 });
 // Ejecutar cada lunes a las 9:00 AM
-cron.schedule("0 9 * * 1", sendSmsFacturasAveonline);
+cron.schedule("0 9 * * 2", sendSmsFacturasAveonline);
 export default router;
