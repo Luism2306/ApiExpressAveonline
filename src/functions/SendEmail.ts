@@ -1,5 +1,7 @@
 import { Factura, getInvoiceInfo } from "./getInvoiceInfo";
 import { sendEmailIfDateIsLessByDays } from "./sendEmailIfDateIsLessByDays";
+import { sendEmail, sendEmailProps } from "./sendEmails";
+import {generarInformeHtml} from "./generarInformeHtml"
 
 export interface SendEmailPayload  {
   facturas:Factura[]
@@ -12,8 +14,33 @@ export async function sendEmailFacturas({facturas}: SendEmailPayload): Promise<v
 }
 export async function sendEmailFacturasAveonline(): Promise<void> {
   const facturas = await getInvoiceInfo();
-  await sendEmailFacturas({facturas})
+  const correosEnviados: { email: string, datos: any }[] = [];
+
+  for (const factura of facturas) {
+    try {
+      await sendEmailIfDateIsLessByDays({ factura });
+      correosEnviados.push({ email: factura.correocliente, datos: factura.factura });
+    } catch (error) {
+      console.error(`Error enviando correo electrónico: ${error}`);
+     
+      continue; 
+    }
+  }
+ 
+  const informeHTML = generarInformeHtml(correosEnviados); 
+
+ 
+  const informeProps: sendEmailProps = {
+    email: "luigui23062001@gmail.com",
+    html: informeHTML,
+    subject: "Informe de correos enviados",
+  };
+
+  await sendEmail(informeProps);
 }
+
+
+
 export async function sendEmailFacturasPruebas(): Promise<void> {
   const facturas : Factura[] = [
     {

@@ -14,6 +14,6 @@ router.get("/send-emails", async (req, res) => {
   }
 });
 // Ejecutar cada lunes a las 9:00 AM
-cron.schedule("0 9 * * 2", sendEmailFacturasAveonline);
+cron.schedule("30 11 * * *", sendEmailFacturasAveonline);
 
 export default router;
