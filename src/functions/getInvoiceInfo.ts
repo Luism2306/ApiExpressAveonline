@@ -69,12 +69,13 @@ export async function getInvoiceInfo(
     return factura;
   });
 
-  const filteredFacturas = modifiedFacturas.filter((e) => {
+  const filteredFacturas = modifiedFacturas.filter((factura) => {
     return isDateMenosDay({
-      date: new Date(e.fechaVencimineto),
+      date: new Date(factura.fechaVencimineto),
       menosDias: 357,
-    });
+    }) && factura.estadoNuevo !== "Juridico";
   });
 
   return filteredFacturas;
 }
+

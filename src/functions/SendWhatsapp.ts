@@ -2,7 +2,6 @@ import { Factura, getInvoiceInfo } from "./getInvoiceInfo";
 import { sendEmail, sendEmailProps } from "./sendEmails";
 import { sendWhatsappIfDateIsLessByDays } from "./sendWhatsappIfDateIsLessByDays";
 import { generarInformeHtml2 } from "./generarInformeHtml2";
-import { sendSmsIfDateIsLessByDays } from "./sendSmsIfDateIsLessByDays";
 
 export interface SendWhatsappPayload  {
   facturas:Factura[]
