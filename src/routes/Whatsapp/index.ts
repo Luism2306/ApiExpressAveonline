@@ -14,5 +14,5 @@ router.get("/send-whatsapp", async (req, res) => {
 });
 
 // Ejecutar cada lunes a las 9:00 AM
-cron.schedule("30 11 * * *", sendWhatsappFacturasAveonline);
+//cron.schedule("30 11 * * *", sendWhatsappFacturasAveonline);
 export default router;
