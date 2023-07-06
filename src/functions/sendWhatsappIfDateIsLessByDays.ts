@@ -34,6 +34,6 @@ export async function sendWhatsappIfDateIsLessByDays({
   } else if (diasDiferencia >= 60) {
     await sendWhatsappDay_TwoMonth({ factura });
   } else {
-    // Si diasDiferencia es menor que 15, no se envía ningún mensaje de WhatsApp
+    
   }
 }
